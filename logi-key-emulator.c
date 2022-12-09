@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <fcntl.h>
+#include <linux/input-event-codes.h>
 #include <linux/input.h>
 #include <stdio.h>
 #include <sys/select.h>
@@ -41,30 +42,30 @@ void Run(const char* mouse_dev, const char* key_dev) {
                 if (evt.value == -1) {
                     // Simulate a ctrl+down key event.
                     // Ctrl enter.
-                    write_event_to_keyboard(wfd, 4, 4, 0x1d);
-                    write_event_to_keyboard(wfd, 1, 29, 1);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0x1d);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_LEFTCTRL, 1);
                     // Page down enter.
-                    write_event_to_keyboard(wfd, 4, 4, 0xc9);
-                    write_event_to_keyboard(wfd, 1, 104, 1);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0xc9);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_PAGEDOWN, 1);
                     // Page down leave.
-                    write_event_to_keyboard(wfd, 4, 4, 0xc9);
-                    write_event_to_keyboard(wfd, 1, 104, 0);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0xc9);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_PAGEDOWN, 0);
                     // Ctrl leave.
-                    write_event_to_keyboard(wfd, 4, 4, 0x1d);
-                    write_event_to_keyboard(wfd, 1, 29, 0);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0x1d);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_LEFTCTRL, 0);
                 } else if (evt.value == 1) {
                     // Ctrl enter.
-                    write_event_to_keyboard(wfd, 4, 4, 0xc9);
-                    write_event_to_keyboard(wfd, 1, 29, 1);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0xc9);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_LEFTCTRL, 1);
                     // Page up enter.
-                    write_event_to_keyboard(wfd, 4, 4, 0xc9);
-                    write_event_to_keyboard(wfd, 1, 109, 1);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0xc9);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_PAGEUP, 1);
                     // Page up leave.
-                    write_event_to_keyboard(wfd, 4, 4, 0xc9);
-                    write_event_to_keyboard(wfd, 1, 109, 0);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0xc9);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_PAGEUP, 0);
                     // Ctrl leave.
-                    write_event_to_keyboard(wfd, 4, 4, 0x1d);
-                    write_event_to_keyboard(wfd, 1, 29, 0);
+                    write_event_to_keyboard(wfd, EV_MSC, 4, 0x1d);
+                    write_event_to_keyboard(wfd, EV_KEY, KEY_LEFTCTRL, 0);
                 } else {
                 }
             }
